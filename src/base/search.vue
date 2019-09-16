@@ -1,6 +1,6 @@
 <template>
   <div class="search">
-
+    <van-search placeholder="请输入搜索关键词" v-model="value" />
   </div>
 </template>
 

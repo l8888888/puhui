@@ -12,11 +12,14 @@
 </template>
 
 <script>
+import Back from 'base/back'
 
 const storage = window.sessionStorage
 const url = 'https://phzzys.phmd247.com/zzys/v1/post/boyili'
 export default {
-
+    components: {
+        Back
+    },
     methods: {
         male(){
             this.$router.push("/"+"male")

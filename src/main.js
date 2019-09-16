@@ -10,7 +10,6 @@ import 'vant/lib/index.css'
 import "./assets/style/reset.css"
 import "./assets/style/iconfont.css"
 import "./assets/style/animate.css"
-import 'mint-ui/lib/style.css'
 
 Vue.config.productionTip = false
 Vue.use(VueScroller)
