@@ -5,6 +5,8 @@ import Sex from '@/components/Sex'
 import Start from '@/components/start'
 import Symptom from  '@/components/symptom'
 import Disease from  '@/components/Disease'
+import Onset from '@/components/Onset'
+import Illtosym from '@/components/illtosym'
 
 Vue.use(Router)
 
@@ -19,7 +21,7 @@ export default new Router({
       component: Sex
     },
     {
-      path: '/:sex',
+      path: '/start',
       component: Start,
       children:[
         {
@@ -30,8 +32,17 @@ export default new Router({
           path:"/disease",
           component: Disease
         }
-      ]
+      ],
+      redirect:'/symptom'
+    },
+    {
+      path:"/:key",
+      component: Onset
+    },
+    {
+      path: "/illtosym/:key",
+      name: "illtosym",
+      component: Illtosym
     }
-
   ]
 })

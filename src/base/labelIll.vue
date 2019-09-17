@@ -3,12 +3,12 @@
     <van-cell :title="colName" :value="colValue" />
     <div class="content">
       <van-button plain type="info" 
-      @click="handleClk(item.p_mkey)"
       v-for="(item,index) in labelArr" 
-      :data-mkey="item.p_mkey"
+      :data-mkey="item.p_key"
       :key="index"
+      @click="handleClk(item.p_key)"
       >
-        {{item.p_msym}}
+        {{item.p_ill}}
       </van-button> 
     </div>  
   </div>
@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: 'label-column',
+  name: 'label-column-ill',
   props:{
     colName:{
       type: String,
@@ -30,14 +30,17 @@ export default {
       type:Array,
       default:()=>[]
     }
-  },
+},
   data() { 
     return {
     }
   },
   methods: {
     handleClk(key){
-      this.$router.push("/"+key)
+      this.$router.push({
+        name: "illtosym",
+        params:{key}
+      })
     }
   }
  }

@@ -3,12 +3,12 @@
     <van-cell :title="colName" :value="colValue" />
     <div class="content">
       <van-button plain type="info" 
-      @click="handleClk(item.p_mkey)"
+      @click="handleClk(item.key_no)"
       v-for="(item,index) in labelArr" 
-      :data-mkey="item.p_mkey"
+      :data-mkey="item.key_no"
       :key="index"
       >
-        {{item.p_msym}}
+        {{item.cvocable}}
       </van-button> 
     </div>  
   </div>
@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: 'label-column',
+  name: 'label-column-high',
   props:{
     colName:{
       type: String,
@@ -30,7 +30,7 @@ export default {
       type:Array,
       default:()=>[]
     }
-  },
+},
   data() { 
     return {
     }

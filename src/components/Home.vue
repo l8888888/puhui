@@ -40,27 +40,10 @@
 import Scroll from 'base/scroll'
 import Upper from 'base/upper'
 
-const storage = window.sessionStorage
-const url = 'https://phzzys.phmd247.com/zzys/v1/post/boyili'
 export default {
     components:{
         Scroll,
         Upper
-    },
-    methods: {
-        _getToken(){
-            storage.time = Math.round(new Date().getTime() / 1000)
-            storage.name = 'phzzysapp'
-            this.axios.get('https://phzzys.phmd247.com/zzys/v1/get/get_token', {params:{
-                time: storage.time,
-                name: storage.name
-            }}).then((res) => {
-                storage.token = res.data.ret.token
-            })
-        },
-    },
-    created(){
-        this._getToken()
     }
 }
 </script>

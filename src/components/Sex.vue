@@ -22,24 +22,34 @@ export default {
     },
     methods: {
         male(){
-            this.$router.push("/"+"male")
+            this.$router.push({path:"/start",query:{sex:'male'}})
         },
         female(){
-            this.$router.push("/"+"female")
+            this.$router.push({path:"/start",query:{sex:'female'}})
         },
         children(){
-            storage.sex = "children"
-            this.$router.push("/"+"children")
+            this.$router.push({path:"/start",query:{sex:'child'}})
         },
         handleCustom(){
             console.log('Custom')
-
         },
         handleHelp(){
             console.log('Help')
-
+        },
+        _getToken(){
+            storage.time = Math.round(new Date().getTime() / 1000)
+            storage.name = 'phzzysapp'
+            this.axios.get('https://phzzys.phmd247.com/zzys/v1/get/get_token', {params:{
+                time: storage.time,
+                name: storage.name
+            }}).then((res) => {
+                storage.token = res.data.ret.token
+            })
         },
     },
+    created(){
+        this._getToken()
+    }
 }
 </script>
 

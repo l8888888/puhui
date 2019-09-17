@@ -5,20 +5,23 @@
       <router-link to="/symptom" class="tab">从主症进入</router-link>
       <router-link to="/disease" class="tab">从病名进入</router-link>
     </div>
-    <router-view/>
+    <keep-alive>
+      <router-view/>
+    </keep-alive>
   </div>
 </template>
 
 <script>
 import back from "base/back"
+import loading from 'base/loading'
 import Qs from 'qs'
 
 const storage = window.sessionStorage
-const url = 'https://phzzys.phmd247.com/zzys/v1/post/boyili'
 export default {
   name: 'start',
   components:{
-    back
+    back,
+    loading
   },
   data() { 
     return {
@@ -26,25 +29,10 @@ export default {
     }
   },
   methods: {
-    _getRecentInfo(){
-      console.log(storage.token)
-      this.axios({
-          url,
-          method: "post",
-          data: Qs.stringify({
-          'ports': "SymTwelve",
-          'time': storage.time,
-          'name': storage.name,
-          'token': storage.token,
-          'raw': '{"sex":"'+this.$route.params.sex+'"}',
-          })
-      }).then((res) => {
-          console.log(res)
-      })
-    }
+
   },
-  mounted(){
-    this._getRecentInfo()
+  created(){
+    storage.sex = this.$route.query.sex
   }
  }
 </script>
