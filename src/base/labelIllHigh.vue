@@ -3,9 +3,9 @@
     <van-cell :title="colName" :value="colValue" />
     <div class="content">
       <van-button plain type="info" 
-      @click="handleClk(item.key_no)"
+      @click="handleClk(item.conid)"
       v-for="(item,index) in labelArr" 
-      :data-mkey="item.key_no"
+      :data-mkey="item.conid"
       :key="index"
       >
         {{item.cvocable}}
@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: 'label-column-high',
+  name: 'label-column-ill-high',
   props:{
     colName:{
       type: String,
@@ -37,8 +37,13 @@ export default {
     }
   },
   methods: {
-    handleClk(key){   
-        this.$router.push("/"+key)
+    handleClk(key){  
+        this.$router.push({
+          name: "illtosym",
+          params: {
+            key
+          }
+        })      
     }
   }
  }

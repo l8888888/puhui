@@ -7,6 +7,8 @@ import Symptom from  '@/components/symptom'
 import Disease from  '@/components/Disease'
 import Onset from '@/components/Onset'
 import Illtosym from '@/components/illtosym'
+import Synway from '@/components/synWay'
+import Assist from '@/components/assist'
 
 Vue.use(Router)
 
@@ -43,6 +45,16 @@ export default new Router({
       path: "/illtosym/:key",
       name: "illtosym",
       component: Illtosym
+    },
+    {
+      path: "/synway/:key",
+      name: "synway",
+      component: Synway      
+    },
+    {
+      path: "/assist",
+      name: "assist",
+      component: Assist
     }
   ]
 })

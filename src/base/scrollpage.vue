@@ -1,0 +1,33 @@
+<template>
+  <div class="scroll-page">
+    <slot></slot>
+  </div>
+</template>
+
+<script>
+import BScroll from 'better-scroll'
+
+export default {
+  name: 'scroll-page',
+  data() { 
+    return {
+
+    }
+  },
+  methods:{
+    
+  },
+  mounted(){
+    this.$nextTick(() => {
+      this.scroll = new BScroll('.scroll-page',{
+        click: true
+      })
+    })
+  }
+ }
+</script>
+
+<style lang="stylus" scoped>
+.scroll-page
+  height 37.5rem
+</style>

@@ -1,18 +1,23 @@
 <template>
   <div class="start">
     <back guide="/sex">开始自诊</back>
-    <div class="nav">
-      <router-link to="/symptom" class="tab">从主症进入</router-link>
-      <router-link to="/disease" class="tab">从病名进入</router-link>
-    </div>
-    <keep-alive>
-      <router-view/>
-    </keep-alive>
+    <scroll-page>
+      <div>
+        <div class="nav">
+          <router-link to="/symptom" class="tab">从主症进入</router-link>
+          <router-link to="/disease" class="tab">从病名进入</router-link>
+        </div>
+        <keep-alive>
+          <router-view/>
+        </keep-alive>
+      </div>
+    </scroll-page>
   </div>
 </template>
 
 <script>
 import back from "base/back"
+import scrollPage from 'base/scrollpage'
 import loading from 'base/loading'
 import Qs from 'qs'
 
@@ -21,7 +26,8 @@ export default {
   name: 'start',
   components:{
     back,
-    loading
+    loading,
+    scrollPage
   },
   data() { 
     return {

@@ -1,24 +1,28 @@
 <template>
     <div class="sex-wrap">
         <back>请点击选择性别</back>
-        <ul class="sex">
-            <li id="male" @click="male"><span class="iconfont" >&#xe608;</span>男性</li>
-            <li id="female" @click="female"><span class="iconfont" >&#xe611;</span>女性</li>
-        </ul>
-        <div id="children" @click="children"><span class="iconfont" >&#xe62b;</span>儿童</div>
-        <div class="use" @click="handleHelp">使用指南</div>
-        <div class="use" @click="handleCustom">在线客服</div>
+        <scroll-page>
+            <ul class="sex">
+                <li id="male" @click="male"><span class="iconfont" >&#xe608;</span>男性</li>
+                <li id="female" @click="female"><span class="iconfont" >&#xe611;</span>女性</li>
+            </ul>
+            <div id="children" @click="children"><span class="iconfont" >&#xe62b;</span>儿童</div>
+            <div class="use" @click="handleHelp">使用指南</div>
+            <div class="use" @click="handleCustom">在线客服</div>
+        </scroll-page>
     </div>
 </template>
 
 <script>
 import Back from 'base/back'
+import scrollPage from 'base/scrollpage'
 
 const storage = window.sessionStorage
 const url = 'https://phzzys.phmd247.com/zzys/v1/post/boyili'
 export default {
     components: {
-        Back
+        Back,
+        scrollPage
     },
     methods: {
         male(){

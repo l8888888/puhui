@@ -2,13 +2,13 @@
   <div class="disease">
     <search></search>
     <label-column-ill class="label-column" colName="近期使用" colValue="可点击选用" :labelArr="labelArr"></label-column-ill>
-    <label-column-high class="label-column" colName="高频使用" colValue="可点击选用" :labelArr="labelArrHigh"></label-column-high>
+    <label-column-ill-high class="label-column" colName="高频使用" colValue="可点击选用" :labelArr="labelArrHigh"></label-column-ill-high>
   </div>
 </template>
 
 <script>
 import Search from 'base/search'
-import labelColumnHigh from 'base/labelHigh'
+import labelColumnIllHigh from 'base/labelIllHigh'
 import labelColumnIll from 'base/labelIll'
 import Qs from 'qs'
 
@@ -18,7 +18,7 @@ export default {
   name: 'disease',
   components: {
     Search,
-    labelColumnHigh,
+    labelColumnIllHigh,
     labelColumnIll
   },
   data() { 
@@ -50,11 +50,11 @@ export default {
           url,
           method: "post",
           data: Qs.stringify({
-          'ports': "IllHfWords",
-          'time': storage.time,
-          'name': storage.name,
-          'token': storage.token,
-          'raw': '{"sex":"'+storage.sex+'"}',
+            'ports': "IllHfWords",
+            'time': storage.time,
+            'name': storage.name,
+            'token': storage.token,
+            'raw': '{"sex":"'+storage.sex+'"}',
           })
       }).then((res) => {
           if(res.data.code != 200) return

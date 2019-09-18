@@ -1,23 +1,31 @@
 <template>
-  <div class="illtosym">
-    <back guide="/start">症状列表</back>
+  <div class="synway">
+    <back :guide="guide">中医证型</back>
     <van-collapse class="van-top " v-model="activeNamesTop">
-      <div class="zyBtn" @click="synWay">中医</div>
+      <div class="zyBtn" @click="home">首页</div>
       <van-collapse-item
         name="1"
         title="item.name"
-      >22</van-collapse-item>
+        disabled
+      ></van-collapse-item>
     </van-collapse>
     <scroll-page>
       <div>
       <van-collapse v-model="activeNames">
         <van-collapse-item 
-          v-for="(item,index) in illtosymArr"
+          v-for="(item,index) in synwayArr"
           :key="item.id"
-          :title="item.name"
+          :title="synName(index,item.name)"
           :name="index"
-          :disabled="item.info === undefined"
-        >{{item.info}}</van-collapse-item>
+          :disabled="item.items === undefined"
+        >
+          <ul class="factor">
+            <h2>证型要素</h2>
+            <li v-for="(itemLi,indexLi) in factor(item.items[0].items)" :key="indexLi">
+              {{itemLi}}
+            </li>
+          </ul>
+        </van-collapse-item>
       </van-collapse>
       </div>
     </scroll-page>
@@ -32,58 +40,72 @@ import Qs from "qs"
 const storage = window.sessionStorage
 const url = 'https://phzzys.phmd247.com/zzys/v1/post/boyili'
 export default {
-  name: 'illtosym',
+  name: 'synway',
   components: {
     back,
     scrollPage
   },
   data() { 
     return {
-      activeNamesTop: ['0'],
-      activeNames: ['0'],
-      illtosymArr:[]
+      synwayArr:[],
+      activeNamesTop:[],
+      activeNames:[]
     }
   },
   methods: {
-    synWay(name){
-      this.$router.push({
-        name:'synway',
-        params:{
-          key:this.$route.params.key
-          },  
-        query:{
-          name:'a'
-        }
-      })
+    home(){
+      this.$router.push('/')
     },
-    _getIlltosym(){
+    _getSynWay(){
       this.axios({
           url,
           method: "post",
           data: Qs.stringify({
-          'ports': "illtosym",
+          'ports': "SynWay",
           'time': storage.time,
           'name': storage.name,
           'token': storage.token,
           'raw': `{
-            "disease":"${this.$route.params.key}",
+            "conid":"${this.$route.params.key}",
           }`,
           })
       }).then((res) => {
           console.log(res)
           if(res.data.code != 200) return
-          this.illtosymArr = res.data.ret
+          this.synwayArr = res.data.ret
       })
     }
   },
+  computed: {
+    guide(){
+      return '/illtosym/' + this.$route.params.key
+    },
+    synName(index,name){
+      return (index,name) => {
+        let num = parseInt(index)+1
+        return `征型${num}：${name}`
+      }
+    },
+    factor(){
+      return (str) => {
+        let arr = []
+        if(str=='') return arr
+        arr = str.split('/').slice(1,-1)
+        return arr.map((item) => {
+          return item.replace(/^\d+-(.*)-.*/,'$1')
+        })
+      }
+    }
+
+  },
   created(){
-    this._getIlltosym()
+    this._getSynWay()
   }
  }
 </script>
 
 <style lang="stylus" scoped>
-  .illtosym >>> .van-collapse-item__title--disabled
+  .synway >>> .van-collapse-item__title--disabled
     color #323233
     .van-cell__right-icon
       display none
@@ -102,4 +124,11 @@ export default {
       text-align center
       color #fff
       border-radius 0.25rem
+  .factor
+    h2
+      color #23d7bc
+      font-size 14px
+    li
+      list-style disc
+      margin-left 20px
 </style>

@@ -18,7 +18,11 @@ export default {
   },
   methods: {
     handleClk(){
-      this.$router.push(this.guide)
+      if(this.guide){
+        this.$router.push(this.guide)
+      }else{
+        this.$router.back(-1)
+      }
     }
   }
  }
@@ -26,6 +30,7 @@ export default {
 
 <style lang="stylus" scoped>
 .back
+  z-index 100
   height 44px
   line-height 44px
   width 100%
