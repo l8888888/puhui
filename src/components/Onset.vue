@@ -3,7 +3,7 @@
     <back guide="/start">选择发病特点</back>
     <van-radio-group v-model="radio">
       <van-cell-group v-if="onsetArr.length">
-        <van-cell :title="item.name" clickable @click="radio = index"
+        <van-cell :title="item.name" clickable @click="handleRadio(index,item.id)"
           v-for="(item,index) in onsetArr"
           :data-idOnset="item.id"
           :key="index"
@@ -35,6 +35,16 @@ export default {
     }
   },
   methods:{
+    handleRadio(index,onset){
+      this.radio = index
+      this.$router.push({
+        name:"assist",
+        query:{
+          key: this.$route.params.key,
+          onset
+        }
+      })
+    },
     info(item){
       Dialog({ message: item.info })
     },

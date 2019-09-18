@@ -38,7 +38,8 @@ export default new Router({
       redirect:'/symptom'
     },
     {
-      path:"/:key",
+      path:"/onset/:key",
+      name: 'onset',
       component: Onset
     },
     {

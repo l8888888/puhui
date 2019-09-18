@@ -38,7 +38,10 @@ export default {
   },
   methods: {
     handleClk(key){   
-        this.$router.push("/"+key)
+      this.$router.push({
+        name: "onset",
+        params: {key}
+      })
     }
   }
  }

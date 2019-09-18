@@ -20,8 +20,10 @@ export default {
   mounted(){
     this.$nextTick(() => {
       this.scroll = new BScroll('.scroll-page',{
-        click: true
+        click: true,
+        observeDOM: true
       })
+      console.log(this.scroll)
     })
   }
  }
@@ -29,5 +31,5 @@ export default {
 
 <style lang="stylus" scoped>
 .scroll-page
-  height 37.5rem
+  height 25rem
 </style>
