@@ -1,22 +1,25 @@
 <template>
   <div class="onset">
     <back guide="/start">选择发病特点</back>
-    <van-radio-group v-model="radio">
-      <van-cell-group v-if="onsetArr.length">
-        <van-cell :title="item.name" clickable @click="handleRadio(index,item.id)"
-          v-for="(item,index) in onsetArr"
-          :data-idOnset="item.id"
-          :key="index"
-        >
-          <div @click.stop="info(item)" class="info" v-if="item.info !== undefined">解释</div>
-          <van-radio slot="right-icon" :name="index" />
-        </van-cell>
-      </van-cell-group>
-    </van-radio-group>
+    <scroll-page>
+      <van-radio-group v-model="radio">
+        <van-cell-group v-if="onsetArr.length">
+          <van-cell :title="item.name" clickable @click="handleRadio(index,item.id)"
+            v-for="(item,index) in onsetArr"
+            :data-idOnset="item.id"
+            :key="index"
+          >
+            <div @click.stop="info(item)" class="info" v-if="item.info !== undefined">解释</div>
+            <!-- <van-radio slot="right-icon" :name="item.id" /> -->
+          </van-cell>
+        </van-cell-group>
+      </van-radio-group>
+    </scroll-page>
   </div>
 </template>
 
 <script>
+import scrollPage from 'base/scrollpage'
 import back from "base/back"
 import { Dialog } from 'vant'
 import Qs from 'qs'
@@ -26,7 +29,8 @@ const url = 'https://phzzys.phmd247.com/zzys/v1/post/boyili'
 export default {
   name: 'onset',
   components: {
-    back
+    back,
+    scrollPage
   },
   data() { 
     return {

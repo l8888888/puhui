@@ -9,6 +9,7 @@ import Onset from '@/components/Onset'
 import Illtosym from '@/components/illtosym'
 import Synway from '@/components/synWay'
 import Assist from '@/components/assist'
+import Probably from '@/components/Probably'
 
 Vue.use(Router)
 
@@ -56,6 +57,11 @@ export default new Router({
       path: "/assist",
       name: "assist",
       component: Assist
+    },
+    {
+      path: "/probably",
+      name: "probably",
+      component: Probably
     }
   ]
 })

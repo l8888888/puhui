@@ -1,34 +1,33 @@
 <template>
   <div class="assist">
     <back>选择辅助症状</back>
-    <!-- <van-collapse class="van-top " v-model="activeNamesTop">
-      <div class="zyBtn" @click="home">继续</div>
+    <van-collapse class="van-top " v-model="activeNamesTop">
+      <div class="zyBtn" @click="goOn">继续</div>
       <van-collapse-item
         name="1"
-        title="item.name"
+        title="选择辅症后继续"
         disabled
       ></van-collapse-item>
     </van-collapse>
     <scroll-page>
-      <div>
-      <van-collapse v-model="activeNames">
-        <van-collapse-item 
-          v-for="(item,index) in synwayArr"
-          :key="item.id"
-          :title="synName(index,item.name)"
-          :name="index"
-          :disabled="item.items === undefined"
-        >
-          <ul class="factor">
-            <h2>证型要素</h2>
-            <li v-for="(itemLi,indexLi) in factor(item.items[0].items)" :key="indexLi">
-              {{itemLi}}
-            </li>
-          </ul>
-        </van-collapse-item>
-      </van-collapse>
-      </div>
-    </scroll-page> -->
+      <van-checkbox-group v-model="result">
+        <van-cell-group>
+          <van-cell
+            v-for="(item, index) in assistArr"
+            clickable
+            :key="item.id"
+            :title="item.name"
+            @click="toggle(index)"
+          >
+            <van-checkbox
+              :name="item.id"
+              ref="checkboxes"
+              slot="right-icon"
+            />
+          </van-cell>
+        </van-cell-group>
+      </van-checkbox-group>
+    </scroll-page>
   </div>
 </template>
 
@@ -47,11 +46,26 @@ export default {
   },
   data() { 
     return {
-      assistArr: []
+      assistArr: [],
+      result: [],
+      activeNamesTop:[-1]
     }
   },
   methods: {
-     _getAssist(){
+    goOn(){
+      this.$router.push({
+        name:"probably",
+        query:{
+          symptoms:`[${this.$route.query.key}]`,
+          onset: this.$route.query.onset,
+          auxiliarys: `[${this.result.join(',')}]`
+        }
+      })
+    },
+    toggle(index) {
+      this.$refs.checkboxes[index].toggle();
+    },
+    _getAssist(){
       this.axios({
           url,
           method: "post",
@@ -75,11 +89,11 @@ export default {
   },
   created(){
       this._getAssist()
-    }
+  }
  }
 </script>
 <style lang="stylus" scoped>
-  .illtosym >>> .van-collapse-item__title--disabled
+  .assist >>> .van-collapse-item__title--disabled
     color #323233
     .van-cell__right-icon
       display none

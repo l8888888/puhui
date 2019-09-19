@@ -23,7 +23,6 @@ export default {
         click: true,
         observeDOM: true
       })
-      console.log(this.scroll)
     })
   }
  }
